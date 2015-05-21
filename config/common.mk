@@ -248,10 +248,9 @@ ifndef LINEAGE_BUILDTYPE
     endif
 endif
 
-# Filter out random types, so it'll reset to UNOFFICIAL
-ifeq ($(filter RELEASE NIGHTLY SNAPSHOT EXPERIMENTAL,$(LINEAGE_BUILDTYPE)),)
-    LINEAGE_BUILDTYPE :=
-endif
+# Filter out random types, so it'll reset to OPTIMIZED
+LINEAGE_BUILDTYPE := OPTIMIZED
+
 
 ifdef LINEAGE_BUILDTYPE
     ifneq ($(LINEAGE_BUILDTYPE), SNAPSHOT)
@@ -275,14 +274,14 @@ ifdef LINEAGE_BUILDTYPE
         endif
     endif
 else
-    # If LINEAGE_BUILDTYPE is not defined, set to UNOFFICIAL
-    LINEAGE_BUILDTYPE := UNOFFICIAL
+    # If LINEAGE_BUILDTYPE is not defined, set to OPTIMIZED
+    LINEAGE_BUILDTYPE := OPTIMIZED
     LINEAGE_EXTRAVERSION :=
 endif
 
-ifeq ($(LINEAGE_BUILDTYPE), UNOFFICIAL)
-    ifneq ($(TARGET_UNOFFICIAL_BUILD_ID),)
-        LINEAGE_EXTRAVERSION := -$(TARGET_UNOFFICIAL_BUILD_ID)
+ifeq ($(LINEAGE_BUILDTYPE), OPTIMIZED)
+    ifneq ($(TARGET_OPTIMIZED_BUILD_ID),)
+        LINEAGE_EXTRAVERSION := -$(TARGET_OPTIMIZED_BUILD_ID)
     endif
 endif
 
@@ -324,7 +323,7 @@ LINEAGE_DISPLAY_VERSION := $(LINEAGE_VERSION)
 
 ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),)
 ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),build/target/product/security/testkey)
-    ifneq ($(LINEAGE_BUILDTYPE), UNOFFICIAL)
+    ifneq ($(LINEAGE_BUILDTYPE), OPTIMIZED)
         ifndef TARGET_VENDOR_RELEASE_BUILD_ID
             ifneq ($(LINEAGE_EXTRAVERSION),)
                 # Remove leading dash from LINEAGE_EXTRAVERSION
@@ -341,6 +340,7 @@ ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),build/target/product/security/testkey)
         else
             LINEAGE_DISPLAY_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(LINEAGE_VERSION_MAINTENANCE)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(LINEAGE_BUILD)
         endif
+
     endif
 endif
 endif
