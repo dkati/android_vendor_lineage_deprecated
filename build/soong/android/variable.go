@@ -10,4 +10,5 @@ Uses_non_treble_camera struct {
 }
 type ProductVariables struct {
 	Needs_text_relocations  *bool `json:",omitempty"`
+	Uses_non_treble_camera  *bool `json:",omitempty"`
 }
