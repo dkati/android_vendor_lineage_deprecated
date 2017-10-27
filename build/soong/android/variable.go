@@ -7,14 +7,9 @@ type Product_variables struct {
 	Uses_non_treble_camera struct {
 		Cflags []string
 	}
-
-	Uses_media_extensions struct {
-		Cflags []string
-	}
 }
 
 type ProductVariables struct {
 	Needs_text_relocations  *bool `json:",omitempty"`
 	Uses_non_treble_camera  *bool `json:",omitempty"`
-	Uses_media_extensions *bool `json:",omitempty"`
 }
