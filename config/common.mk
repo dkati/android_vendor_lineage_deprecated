@@ -80,7 +80,8 @@ PRODUCT_COPY_FILES += \
 
 # This is Lineage!
 PRODUCT_COPY_FILES += \
-    vendor/lineage/config/permissions/org.lineageos.android.xml:system/etc/permissions/org.lineageos.android.xml
+    vendor/lineage/config/permissions/org.lineageos.android.xml:system/etc/permissions/org.lineageos.android.xml \
+    vendor/lineage/config/permissions/privapp-permissions-lineage.xml:system/etc/permissions/privapp-permissions-lineage.xml
 
 # Include Lineage audio files
 include vendor/lineage/config/lineage_audio.mk
@@ -282,8 +283,8 @@ ifeq ($(LINEAGE_BUILDTYPE), OPTIMIZED)
     endif
 endif
 
-
 LINEAGE_VERSION := Optimized-LineageOS-15.0-$(shell date -u +%Y%m%d)
+
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.lineage.version=$(LINEAGE_VERSION) \
